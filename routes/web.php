@@ -17,4 +17,5 @@ Route::get('/', function () {
 
 
 //Ruta de Auth
-Route::get('/login', 'ConnectController@getLogin');
+Route::get('/login', 'ConnectController@login');
+Route::get('/register', 'ConnectController@register');

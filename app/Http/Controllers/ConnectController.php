@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 
 class ConnectController extends Controller
 {
-    public function getLogin(){
+    public function login(){
         return view('connect.login');
+    }
+
+    public function register(){
+        return view('connect.register');
     }
 }
