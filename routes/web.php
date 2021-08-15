@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+//Ruta de Auth
+Route::get('/login', 'ConnectController@getLogin');
