@@ -13,7 +13,7 @@
                     </a>
                 </div>
                 <div class="inside">
-                {!! Form::open(['url' => '/login'])!!}
+                {!! Form::open(['url' => '/user/login'])!!}
                 <label for="email">Correo:</label>
                 <div class="input-group mtop16 mbottom16">
                    <div class="input-gropup-prepend">
@@ -30,6 +30,25 @@
                 </div>
                 {!!   Form::submit('Ingresar', ['class' => 'btn btn-primary mbottom16' ])  !!}
                 {!! Form::close()  !!}
+
+                @if(Session::has('message'))
+                    <div class="container box_register">
+                        <div class="alert alert-{{ Session::get('typealert')}}" style="display:none;">
+                            {{ Session::get('message')}}
+                            @if ($errors->any())
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            @endif
+                            <script>
+                                $('.alert').slideDown();
+                                setTimeout(function(){ $('.alert').slideUp(); }, 10000);
+                            </script>
+                        </div>
+                    </div>
+                @endif
 
                 <a href="{{ url('/register')}}" class="footer">
                    ¿No tienes una cuenta? Registrate

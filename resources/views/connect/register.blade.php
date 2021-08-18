@@ -13,20 +13,27 @@
                     </a>
                 </div>
                 <div class="inside">
-                {!! Form::open(['url' => '/login'])!!}
-                <label for="nameUser">Nombre:</label>
+                {!! Form::open(['url' => '/user/register'])!!}
+                <label for="name">Nombre:</label>
                 <div class="input-group mtop16 mbottom16">
                    <div class="input-gropup-prepend">
                        <div class="input-group-text"><i class="fas fa-user"></i></div>
                    </div>
-                    {!! Form::text('nameUser', null, ['class' => 'form-control']) !!}
+                    {!! Form::text('name', null, ['class' => 'form-control']) !!}
                 </div>
-                <label for="surNamme">Apellido:</label>
+                <label for="lastname">Apellido:</label>
                 <div class="input-group mtop16 mbottom16">
                    <div class="input-gropup-prepend">
                        <div class="input-group-text"><i class="fas fa-user"></i></div>
                    </div>
-                    {!! Form::text('surName', null, ['class' => 'form-control']) !!}
+                    {!! Form::text('lastname', null, ['class' => 'form-control']) !!}
+                </div>
+                <label for="phone">Telefono:</label>
+                <div class="input-group mtop16 mbottom16">
+                   <div class="input-gropup-prepend">
+                       <div class="input-group-text"><i class="fas fa-user"></i></div>
+                   </div>
+                    {!! Form::text('phone', null, ['class' => 'form-control']) !!}
                 </div>
                 <label for="email">Correo:</label>
                 <div class="input-group mtop16 mbottom16">
@@ -42,15 +49,35 @@
                    </div>
                     {!! Form::password('password', ['class' => 'form-control']) !!}
                 </div>
-                <label for="repeatpassword">Confirme la Contraseña:</label>
+                <label for="repeat-password">Confirme la Contraseña:</label>
                 <div class="input-group mtop16 mbottom16">
                    <div class="input-gropup-prepend">
                        <div class="input-group-text"><i class="fas fa-key"></i></div>
                    </div>
-                    {!! Form::password('repeatpassword', ['class' => 'form-control']) !!}
+                    {!! Form::password('repeat-password', ['class' => 'form-control']) !!}
                 </div>
-                {!!   Form::submit('Ingresar', ['class' => 'btn btn-primary mbottom16' ])  !!}
+                {!!   Form::submit('Crear cuenta', ['class' => 'btn btn-primary mbottom16' ])  !!}
                 {!! Form::close()  !!}
+
+
+                    @if(Session::has('message'))
+                            <div class="container box_register">
+                                <div class="alert alert-{{ Session::get('typealert')}}" style="display:none;">
+                                    {{ Session::get('message')}}
+                                    @if ($errors->any())
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                    @endif
+                                    <script>
+                                        $('.alert').slideDown();
+                                        setTimeout(function(){ $('.alert').slideUp(); }, 10000);
+                                    </script>
+                                </div>
+                            </div>
+                    @endif
 
                 <a href="{{ url('/login')}}" class="footer">
                    Ya tengo una cuenta, Ingresar
@@ -58,7 +85,7 @@
 
                 <a href="{{ url('/recover')}}" class="footer">
                     Recuperar contraseña
-                 </a>
+                </a>
             </div>
         </div>
 @endsection
