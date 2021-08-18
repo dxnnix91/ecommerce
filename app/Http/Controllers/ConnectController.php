@@ -6,19 +6,28 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\User;
-
+use Illuminate\Support\Facades\Auth;
 
 class ConnectController extends Controller
 {
+
+//*********************************************************************************************** */
+
+    public function __construct(){
+        $this->middleware('guest')->except('userLogout');
+    }
+
+//*********************************************************************************************** */
     public function login()
     {
         return view('connect.login');
     }
+//*********************************************************************************************** */
     public function register()
     {
         return view('connect.register');
     }
-
+//*********************************************************************************************** */
     public function userRegister(Request $request)
     {
         $rules = [
@@ -63,6 +72,7 @@ class ConnectController extends Controller
         }
     }
 
+//*********************************************************************************************** */
     public function userLogin(Request $request)
     {
 
@@ -83,7 +93,20 @@ class ConnectController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator)->with('message', 'Se ha producido un error.')->with('typealert', 'danger');
         } else {
-            return redirect('/');
+            if(Auth::attempt(['email' => $request->input('email'),
+            'password' => $request->input('password')], true)){//el true es para guardar la sesion el cookies o sesion
+                return redirect('/');
+            }else{
+                return back()->with('message', 'Correo o contraseña incorrecta.')->with('typealert', 'danger');
+            }
+
         }
     }
+
+    //*********************************************************************************************** */
+    public function userLogout(){
+        Auth::logout();
+        return redirect('/');
+    }
+
 }

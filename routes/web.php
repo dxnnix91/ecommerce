@@ -11,13 +11,14 @@
 |
 */
 
-Route::GET('/', function () {
+Route::get('/', function () {
     return view('welcome');
 });
 
 
 //Ruta de Auth
-Route::GET('/login', 'ConnectController@login')->name('login');
-Route::GET('/register', 'ConnectController@register')->name('register');
-Route::POST('/user/register', 'ConnectController@userRegister')->name('userRegister');
-Route::POST('/user/login', 'ConnectController@userLogin')->name('userLogin');
+Route::get('/login', 'ConnectController@login')->name('login');
+Route::get('/register', 'ConnectController@register')->name('register');
+Route::post('/user/register', 'ConnectController@userRegister')->name('userRegister');
+Route::post('/user/login', 'ConnectController@userLogin')->name('userLogin');
+Route::get('/user/logout', 'ConnectController@userLogout')->name('userLogout');
