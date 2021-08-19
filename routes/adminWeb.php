@@ -1,28 +1,5 @@
 <?php
 
-namespace App\Http\Middleware;
-
-use Closure;
-
-class IsAdmin
-{
-    /**
-     * Handle an incoming request.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @\closure $next
-     * @return mixed
-     */
-    public function handle($request, Closure $next)
-    {
-        if(Auth::user()->role == "1"){
-            return $next($request);
-        }else{
-            return redirect('/');
-        }
-    }
-}
-
 
 // |--------------------------------------------------------------------------
 // | Web Routes
@@ -51,3 +28,6 @@ class IsAdmin
 //protected $routeMiddleware[
 //'IsAdmin' => \App\Http\Middleware\IsAdmin::class];
 
+Route::get('/admin', function(){
+    return 'hola mundo';
+});
